@@ -1,0 +1,798 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> start
+Rule 1     start -> statements
+Rule 2     statements -> statement
+Rule 3     statements -> statement SEMICOLON statements
+Rule 4     statement -> NAME EQUALS expression
+Rule 5     statement -> NAME LPAREN arglist RPAREN EQUALS expression
+Rule 6     statement -> expression
+Rule 7     expression -> term
+Rule 8     expression -> expression PLUS term
+Rule 9     expression -> expression MINUS term
+Rule 10    term -> term TIMES factor
+Rule 11    term -> term DIVIDE factor
+Rule 12    term -> factor
+Rule 13    arglist -> expression
+Rule 14    arglist -> arglist COMMA expression
+Rule 15    factor -> NUMBER
+Rule 16    factor -> PLUS factor
+Rule 17    factor -> MINUS factor
+Rule 18    factor -> NAME
+Rule 19    factor -> NAME LPAREN arglist RPAREN
+Rule 20    factor -> factor POWER factor
+Rule 21    factor -> LPAREN expression RPAREN
+
+Terminals, with rules where they appear
+
+COMMA                : 14
+DIVIDE               : 11
+EQUALS               : 4 5
+LPAREN               : 5 19 21
+MINUS                : 9 17
+NAME                 : 4 5 18 19
+NUMBER               : 15
+PLUS                 : 8 16
+POWER                : 20
+RPAREN               : 5 19 21
+SEMICOLON            : 3
+TIMES                : 10
+error                : 
+
+Nonterminals, with rules where they appear
+
+arglist              : 5 14 19
+expression           : 4 5 6 8 9 13 14 21
+factor               : 10 11 12 16 17 20 20
+start                : 0
+statement            : 2 3
+statements           : 1 3
+term                 : 7 8 9 10 11
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start
+    (1) start -> . statements
+    (2) statements -> . statement
+    (3) statements -> . statement SEMICOLON statements
+    (4) statement -> . NAME EQUALS expression
+    (5) statement -> . NAME LPAREN arglist RPAREN EQUALS expression
+    (6) statement -> . expression
+    (7) expression -> . term
+    (8) expression -> . expression PLUS term
+    (9) expression -> . expression MINUS term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NAME            shift and go to state 4
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 6
+
+    start                          shift and go to state 1
+    statements                     shift and go to state 2
+    statement                      shift and go to state 3
+    expression                     shift and go to state 5
+    term                           shift and go to state 7
+    factor                         shift and go to state 10
+
+state 1
+
+    (0) S' -> start .
+
+
+
+state 2
+
+    (1) start -> statements .
+
+    $end            reduce using rule 1 (start -> statements .)
+
+
+state 3
+
+    (2) statements -> statement .
+    (3) statements -> statement . SEMICOLON statements
+
+    $end            reduce using rule 2 (statements -> statement .)
+    SEMICOLON       shift and go to state 12
+
+
+state 4
+
+    (4) statement -> NAME . EQUALS expression
+    (5) statement -> NAME . LPAREN arglist RPAREN EQUALS expression
+    (18) factor -> NAME .
+    (19) factor -> NAME . LPAREN arglist RPAREN
+
+    EQUALS          shift and go to state 13
+    LPAREN          shift and go to state 14
+    POWER           reduce using rule 18 (factor -> NAME .)
+    TIMES           reduce using rule 18 (factor -> NAME .)
+    DIVIDE          reduce using rule 18 (factor -> NAME .)
+    PLUS            reduce using rule 18 (factor -> NAME .)
+    MINUS           reduce using rule 18 (factor -> NAME .)
+    SEMICOLON       reduce using rule 18 (factor -> NAME .)
+    $end            reduce using rule 18 (factor -> NAME .)
+
+
+state 5
+
+    (6) statement -> expression .
+    (8) expression -> expression . PLUS term
+    (9) expression -> expression . MINUS term
+
+    SEMICOLON       reduce using rule 6 (statement -> expression .)
+    $end            reduce using rule 6 (statement -> expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+
+
+state 6
+
+    (21) factor -> LPAREN . expression RPAREN
+    (7) expression -> . term
+    (8) expression -> . expression PLUS term
+    (9) expression -> . expression MINUS term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    NAME            shift and go to state 18
+    LPAREN          shift and go to state 6
+
+    expression                     shift and go to state 17
+    term                           shift and go to state 7
+    factor                         shift and go to state 10
+
+state 7
+
+    (7) expression -> term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 7 (expression -> term .)
+    MINUS           reduce using rule 7 (expression -> term .)
+    SEMICOLON       reduce using rule 7 (expression -> term .)
+    $end            reduce using rule 7 (expression -> term .)
+    RPAREN          reduce using rule 7 (expression -> term .)
+    COMMA           reduce using rule 7 (expression -> term .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+
+
+state 8
+
+    (16) factor -> PLUS . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    NAME            shift and go to state 18
+    LPAREN          shift and go to state 6
+
+    factor                         shift and go to state 21
+
+state 9
+
+    (17) factor -> MINUS . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    NAME            shift and go to state 18
+    LPAREN          shift and go to state 6
+
+    factor                         shift and go to state 22
+
+state 10
+
+    (12) term -> factor .
+    (20) factor -> factor . POWER factor
+
+    TIMES           reduce using rule 12 (term -> factor .)
+    DIVIDE          reduce using rule 12 (term -> factor .)
+    PLUS            reduce using rule 12 (term -> factor .)
+    MINUS           reduce using rule 12 (term -> factor .)
+    SEMICOLON       reduce using rule 12 (term -> factor .)
+    $end            reduce using rule 12 (term -> factor .)
+    RPAREN          reduce using rule 12 (term -> factor .)
+    COMMA           reduce using rule 12 (term -> factor .)
+    POWER           shift and go to state 23
+
+
+state 11
+
+    (15) factor -> NUMBER .
+
+    POWER           reduce using rule 15 (factor -> NUMBER .)
+    TIMES           reduce using rule 15 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 15 (factor -> NUMBER .)
+    PLUS            reduce using rule 15 (factor -> NUMBER .)
+    MINUS           reduce using rule 15 (factor -> NUMBER .)
+    SEMICOLON       reduce using rule 15 (factor -> NUMBER .)
+    $end            reduce using rule 15 (factor -> NUMBER .)
+    RPAREN          reduce using rule 15 (factor -> NUMBER .)
+    COMMA           reduce using rule 15 (factor -> NUMBER .)
+
+
+state 12
+
+    (3) statements -> statement SEMICOLON . statements
+    (2) statements -> . statement
+    (3) statements -> . statement SEMICOLON statements
+    (4) statement -> . NAME EQUALS expression
+    (5) statement -> . NAME LPAREN arglist RPAREN EQUALS expression
+    (6) statement -> . expression
+    (7) expression -> . term
+    (8) expression -> . expression PLUS term
+    (9) expression -> . expression MINUS term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NAME            shift and go to state 4
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 6
+
+    statement                      shift and go to state 3
+    statements                     shift and go to state 24
+    expression                     shift and go to state 5
+    term                           shift and go to state 7
+    factor                         shift and go to state 10
+
+state 13
+
+    (4) statement -> NAME EQUALS . expression
+    (7) expression -> . term
+    (8) expression -> . expression PLUS term
+    (9) expression -> . expression MINUS term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    NAME            shift and go to state 18
+    LPAREN          shift and go to state 6
+
+    expression                     shift and go to state 25
+    term                           shift and go to state 7
+    factor                         shift and go to state 10
+
+state 14
+
+    (5) statement -> NAME LPAREN . arglist RPAREN EQUALS expression
+    (19) factor -> NAME LPAREN . arglist RPAREN
+    (13) arglist -> . expression
+    (14) arglist -> . arglist COMMA expression
+    (7) expression -> . term
+    (8) expression -> . expression PLUS term
+    (9) expression -> . expression MINUS term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    NAME            shift and go to state 18
+    LPAREN          shift and go to state 6
+
+    arglist                        shift and go to state 26
+    expression                     shift and go to state 27
+    term                           shift and go to state 7
+    factor                         shift and go to state 10
+
+state 15
+
+    (8) expression -> expression PLUS . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    NAME            shift and go to state 18
+    LPAREN          shift and go to state 6
+
+    term                           shift and go to state 28
+    factor                         shift and go to state 10
+
+state 16
+
+    (9) expression -> expression MINUS . term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    NAME            shift and go to state 18
+    LPAREN          shift and go to state 6
+
+    term                           shift and go to state 29
+    factor                         shift and go to state 10
+
+state 17
+
+    (21) factor -> LPAREN expression . RPAREN
+    (8) expression -> expression . PLUS term
+    (9) expression -> expression . MINUS term
+
+    RPAREN          shift and go to state 30
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+
+
+state 18
+
+    (18) factor -> NAME .
+    (19) factor -> NAME . LPAREN arglist RPAREN
+
+    POWER           reduce using rule 18 (factor -> NAME .)
+    TIMES           reduce using rule 18 (factor -> NAME .)
+    DIVIDE          reduce using rule 18 (factor -> NAME .)
+    RPAREN          reduce using rule 18 (factor -> NAME .)
+    PLUS            reduce using rule 18 (factor -> NAME .)
+    MINUS           reduce using rule 18 (factor -> NAME .)
+    SEMICOLON       reduce using rule 18 (factor -> NAME .)
+    $end            reduce using rule 18 (factor -> NAME .)
+    COMMA           reduce using rule 18 (factor -> NAME .)
+    LPAREN          shift and go to state 31
+
+
+state 19
+
+    (10) term -> term TIMES . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    NAME            shift and go to state 18
+    LPAREN          shift and go to state 6
+
+    factor                         shift and go to state 32
+
+state 20
+
+    (11) term -> term DIVIDE . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    NAME            shift and go to state 18
+    LPAREN          shift and go to state 6
+
+    factor                         shift and go to state 33
+
+state 21
+
+    (16) factor -> PLUS factor .
+    (20) factor -> factor . POWER factor
+
+    TIMES           reduce using rule 16 (factor -> PLUS factor .)
+    DIVIDE          reduce using rule 16 (factor -> PLUS factor .)
+    PLUS            reduce using rule 16 (factor -> PLUS factor .)
+    MINUS           reduce using rule 16 (factor -> PLUS factor .)
+    SEMICOLON       reduce using rule 16 (factor -> PLUS factor .)
+    $end            reduce using rule 16 (factor -> PLUS factor .)
+    RPAREN          reduce using rule 16 (factor -> PLUS factor .)
+    COMMA           reduce using rule 16 (factor -> PLUS factor .)
+    POWER           shift and go to state 23
+
+  ! POWER           [ reduce using rule 16 (factor -> PLUS factor .) ]
+
+
+state 22
+
+    (17) factor -> MINUS factor .
+    (20) factor -> factor . POWER factor
+
+    TIMES           reduce using rule 17 (factor -> MINUS factor .)
+    DIVIDE          reduce using rule 17 (factor -> MINUS factor .)
+    PLUS            reduce using rule 17 (factor -> MINUS factor .)
+    MINUS           reduce using rule 17 (factor -> MINUS factor .)
+    SEMICOLON       reduce using rule 17 (factor -> MINUS factor .)
+    $end            reduce using rule 17 (factor -> MINUS factor .)
+    RPAREN          reduce using rule 17 (factor -> MINUS factor .)
+    COMMA           reduce using rule 17 (factor -> MINUS factor .)
+    POWER           shift and go to state 23
+
+  ! POWER           [ reduce using rule 17 (factor -> MINUS factor .) ]
+
+
+state 23
+
+    (20) factor -> factor POWER . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    NAME            shift and go to state 18
+    LPAREN          shift and go to state 6
+
+    factor                         shift and go to state 34
+
+state 24
+
+    (3) statements -> statement SEMICOLON statements .
+
+    $end            reduce using rule 3 (statements -> statement SEMICOLON statements .)
+
+
+state 25
+
+    (4) statement -> NAME EQUALS expression .
+    (8) expression -> expression . PLUS term
+    (9) expression -> expression . MINUS term
+
+    SEMICOLON       reduce using rule 4 (statement -> NAME EQUALS expression .)
+    $end            reduce using rule 4 (statement -> NAME EQUALS expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+
+
+state 26
+
+    (5) statement -> NAME LPAREN arglist . RPAREN EQUALS expression
+    (19) factor -> NAME LPAREN arglist . RPAREN
+    (14) arglist -> arglist . COMMA expression
+
+    RPAREN          shift and go to state 35
+    COMMA           shift and go to state 36
+
+
+state 27
+
+    (13) arglist -> expression .
+    (8) expression -> expression . PLUS term
+    (9) expression -> expression . MINUS term
+
+    RPAREN          reduce using rule 13 (arglist -> expression .)
+    COMMA           reduce using rule 13 (arglist -> expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+
+
+state 28
+
+    (8) expression -> expression PLUS term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 8 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 8 (expression -> expression PLUS term .)
+    SEMICOLON       reduce using rule 8 (expression -> expression PLUS term .)
+    $end            reduce using rule 8 (expression -> expression PLUS term .)
+    RPAREN          reduce using rule 8 (expression -> expression PLUS term .)
+    COMMA           reduce using rule 8 (expression -> expression PLUS term .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+
+
+state 29
+
+    (9) expression -> expression MINUS term .
+    (10) term -> term . TIMES factor
+    (11) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 9 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 9 (expression -> expression MINUS term .)
+    SEMICOLON       reduce using rule 9 (expression -> expression MINUS term .)
+    $end            reduce using rule 9 (expression -> expression MINUS term .)
+    RPAREN          reduce using rule 9 (expression -> expression MINUS term .)
+    COMMA           reduce using rule 9 (expression -> expression MINUS term .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+
+
+state 30
+
+    (21) factor -> LPAREN expression RPAREN .
+
+    POWER           reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    SEMICOLON       reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    $end            reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+    COMMA           reduce using rule 21 (factor -> LPAREN expression RPAREN .)
+
+
+state 31
+
+    (19) factor -> NAME LPAREN . arglist RPAREN
+    (13) arglist -> . expression
+    (14) arglist -> . arglist COMMA expression
+    (7) expression -> . term
+    (8) expression -> . expression PLUS term
+    (9) expression -> . expression MINUS term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    NAME            shift and go to state 18
+    LPAREN          shift and go to state 6
+
+    arglist                        shift and go to state 37
+    expression                     shift and go to state 27
+    term                           shift and go to state 7
+    factor                         shift and go to state 10
+
+state 32
+
+    (10) term -> term TIMES factor .
+    (20) factor -> factor . POWER factor
+
+    TIMES           reduce using rule 10 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 10 (term -> term TIMES factor .)
+    PLUS            reduce using rule 10 (term -> term TIMES factor .)
+    MINUS           reduce using rule 10 (term -> term TIMES factor .)
+    SEMICOLON       reduce using rule 10 (term -> term TIMES factor .)
+    $end            reduce using rule 10 (term -> term TIMES factor .)
+    RPAREN          reduce using rule 10 (term -> term TIMES factor .)
+    COMMA           reduce using rule 10 (term -> term TIMES factor .)
+    POWER           shift and go to state 23
+
+
+state 33
+
+    (11) term -> term DIVIDE factor .
+    (20) factor -> factor . POWER factor
+
+    TIMES           reduce using rule 11 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 11 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 11 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 11 (term -> term DIVIDE factor .)
+    SEMICOLON       reduce using rule 11 (term -> term DIVIDE factor .)
+    $end            reduce using rule 11 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 11 (term -> term DIVIDE factor .)
+    COMMA           reduce using rule 11 (term -> term DIVIDE factor .)
+    POWER           shift and go to state 23
+
+
+state 34
+
+    (20) factor -> factor POWER factor .
+    (20) factor -> factor . POWER factor
+
+    TIMES           reduce using rule 20 (factor -> factor POWER factor .)
+    DIVIDE          reduce using rule 20 (factor -> factor POWER factor .)
+    PLUS            reduce using rule 20 (factor -> factor POWER factor .)
+    MINUS           reduce using rule 20 (factor -> factor POWER factor .)
+    SEMICOLON       reduce using rule 20 (factor -> factor POWER factor .)
+    $end            reduce using rule 20 (factor -> factor POWER factor .)
+    RPAREN          reduce using rule 20 (factor -> factor POWER factor .)
+    COMMA           reduce using rule 20 (factor -> factor POWER factor .)
+    POWER           shift and go to state 23
+
+  ! POWER           [ reduce using rule 20 (factor -> factor POWER factor .) ]
+
+
+state 35
+
+    (5) statement -> NAME LPAREN arglist RPAREN . EQUALS expression
+    (19) factor -> NAME LPAREN arglist RPAREN .
+
+    EQUALS          shift and go to state 38
+    POWER           reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    TIMES           reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    DIVIDE          reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    PLUS            reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    MINUS           reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    SEMICOLON       reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    $end            reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+
+
+state 36
+
+    (14) arglist -> arglist COMMA . expression
+    (7) expression -> . term
+    (8) expression -> . expression PLUS term
+    (9) expression -> . expression MINUS term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    NAME            shift and go to state 18
+    LPAREN          shift and go to state 6
+
+    expression                     shift and go to state 39
+    term                           shift and go to state 7
+    factor                         shift and go to state 10
+
+state 37
+
+    (19) factor -> NAME LPAREN arglist . RPAREN
+    (14) arglist -> arglist . COMMA expression
+
+    RPAREN          shift and go to state 40
+    COMMA           shift and go to state 36
+
+
+state 38
+
+    (5) statement -> NAME LPAREN arglist RPAREN EQUALS . expression
+    (7) expression -> . term
+    (8) expression -> . expression PLUS term
+    (9) expression -> . expression MINUS term
+    (10) term -> . term TIMES factor
+    (11) term -> . term DIVIDE factor
+    (12) term -> . factor
+    (15) factor -> . NUMBER
+    (16) factor -> . PLUS factor
+    (17) factor -> . MINUS factor
+    (18) factor -> . NAME
+    (19) factor -> . NAME LPAREN arglist RPAREN
+    (20) factor -> . factor POWER factor
+    (21) factor -> . LPAREN expression RPAREN
+
+    NUMBER          shift and go to state 11
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    NAME            shift and go to state 18
+    LPAREN          shift and go to state 6
+
+    expression                     shift and go to state 41
+    term                           shift and go to state 7
+    factor                         shift and go to state 10
+
+state 39
+
+    (14) arglist -> arglist COMMA expression .
+    (8) expression -> expression . PLUS term
+    (9) expression -> expression . MINUS term
+
+    RPAREN          reduce using rule 14 (arglist -> arglist COMMA expression .)
+    COMMA           reduce using rule 14 (arglist -> arglist COMMA expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+
+
+state 40
+
+    (19) factor -> NAME LPAREN arglist RPAREN .
+
+    POWER           reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    TIMES           reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    DIVIDE          reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    RPAREN          reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    PLUS            reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    MINUS           reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    SEMICOLON       reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    $end            reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+    COMMA           reduce using rule 19 (factor -> NAME LPAREN arglist RPAREN .)
+
+
+state 41
+
+    (5) statement -> NAME LPAREN arglist RPAREN EQUALS expression .
+    (8) expression -> expression . PLUS term
+    (9) expression -> expression . MINUS term
+
+    SEMICOLON       reduce using rule 5 (statement -> NAME LPAREN arglist RPAREN EQUALS expression .)
+    $end            reduce using rule 5 (statement -> NAME LPAREN arglist RPAREN EQUALS expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+
