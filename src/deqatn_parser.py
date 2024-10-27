@@ -7,7 +7,7 @@ sys.path.append(test)
 
 import ply.yacc as yacc
 from math import *
-from deqatn_lexer import get_original_position, tokens, lex, function_names,set_original_input,symbolsk
+from src.deqatn_lexer import get_original_position, tokens, lex, function_names,set_original_input,symbolsk
 
 function_arg_count = {
     'abs': 1,

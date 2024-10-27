@@ -1,9 +1,8 @@
 import unittest
-from deqatn_lexer import lex, tokens  # Import your lexer
+from src.deqatn_lexer import lex, tokens
 
 class TestLexer(unittest.TestCase):
 
-    # Helper function to extract tokens from input
     def extract_tokens(self, input_expr):
         lex.input(input_expr)
         result = []

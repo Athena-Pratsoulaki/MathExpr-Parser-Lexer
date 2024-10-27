@@ -1,5 +1,5 @@
 import unittest
-from deqatn_parser import check_deqatn_expression, PositionTracker  # Import your parser functions
+from src.deqatn_parser import check_deqatn_expression, PositionTracker  # Import your parser functions
 
 class TestParser(unittest.TestCase):
 
