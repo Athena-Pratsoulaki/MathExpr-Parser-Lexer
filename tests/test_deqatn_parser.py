@@ -48,8 +48,8 @@ class TestParser(unittest.TestCase):
     # Test cases for PositionTracker
     def test_position_tracker(self):
         tracker_test_cases = {
-            "f(x) = x - 1": (1, 13),  # Line 1, Column 1 for the start of the expression
-            "g(y) = y + 3\nh(z) = z - 2": (2, 6),  # Check position of 'h(z)'
+            "f(x) = x - 1": (1, 13),
+            "g(y) = y + 3\nh(z) = z - 2": (2, 6),
         }
 
         for expression, expected_line_col in tracker_test_cases.items():
