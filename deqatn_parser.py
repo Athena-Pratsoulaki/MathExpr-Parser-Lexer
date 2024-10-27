@@ -10,10 +10,30 @@ from math import *
 from deqatn_lexer import get_original_position, tokens, lex, function_names,set_original_input,symbolsk
 
 function_arg_count = {
-    'dba': 3,
-    'sin': 1,
+    'abs': 1,
+    'acos': 1,
+    'acosh': 1,
+    'asin': 1,
+    'asinh': 1,
+    'atan': 1,
+    'atan2': 2,
+    'atanh': 1,
     'cos': 1,
+    'cosh': 1,
+    'dba': 3,
+    'dba2': 3,
+    'inv': 1,
+    'invdb': 1,
+    'log': 1,
+    'log10': 1,
+    'logx': 2,
+    'mod': 2,
+    'pi': 1,
+    'sin': 1,
+    'sinh': 1,
+    'sqrt': 1,
     'tan': 1,
+    'tanh': 1,
 }
 
 # CONSTANTS
